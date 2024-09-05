@@ -55,7 +55,7 @@ let style = Style(/* css */ `
   margin: 0 4px;
   text-align: center;
 }
-.console-output {
+.exercise-message {
   background-color: rgba(0,0,0,0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
@@ -86,12 +86,12 @@ let page = (
       <code>(= _ (not (= 1 nil)))</code>
       <div className="exercise">
         <code>console.log(1 + 1)</code>
-        <div class="console-output">print: 2</div>
+        <div class="exercise-message">print: 2</div>
       </div>
       {mapArray(exercises, exercise => {
         return (
           <div className="exercise">
-            <div class="console-output">
+            <div class="exercise-message">
               expected to{' '}
               <span class="expected-result">
                 print: {exercise.expect_print}
@@ -110,7 +110,7 @@ let page = (
             <div>
               <button onclick="run(event)">run</button>
             </div>
-            <div class="result">Click "run" to see result</div>
+            <div class="result exercise-message">Click "run" to see result</div>
             <div class="result-status"></div>
           </div>
         )
