@@ -4,6 +4,7 @@ import SourceCode from '../components/source-code.js'
 import { Routes } from '../routes.js'
 import { title } from '../../config.js'
 import Style from '../components/style.js'
+import { Link } from '../components/router.js'
 
 // Calling <Component/> will transform the JSX into AST for each rendering.
 // You can reuse a pre-compute AST like `let component = <Component/>`.
@@ -24,14 +25,7 @@ let content = (
       soon as possible. And it's ideal for SEO.
     </p>
     <p>
-      Try some reactive demo:{' '}
-      <a href="https://liveviews.cc/thermostat" target="_blank">
-        Thermostat
-      </a>
-      ,{' '}
-      <a href="https://liveviews.cc/form" target="_blank">
-        Form Demo
-      </a>
+      <Link href="/learn">Get started</Link>
     </p>
     <SourceCode page="home.tsx" />
   </div>

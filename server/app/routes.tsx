@@ -1,3 +1,4 @@
+import Learn from './pages/learn.js'
 import AppNotice from './pages/app-notice.js'
 import AppChat from './pages/app-chat.js'
 import AppSettings from './pages/app-settings.js'
@@ -81,6 +82,7 @@ let routeDict = {
   ...AppSettings.routes,
   ...AppMore.routes,
   ...Home.routes,
+  ...Learn.routes,
   ...DemoToast.routes,
   '/user-agents': {
     title: title('User Agents of Visitors'),
