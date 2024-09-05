@@ -1,0 +1,4 @@
+user=node
+host=web-dev-learner-wiki.cc
+root_dir=/home/node/workspace/github.com/beenotung/web-dev-learner-wiki
+pm2_name="web-dev-learner-wiki"
