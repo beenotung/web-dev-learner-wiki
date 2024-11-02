@@ -46,8 +46,9 @@ let style = Style(/* css */ `
   background-color: rgba(0,0,0,0.8);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  align-items: end;
+  white-space: pre-wrap;
 }
 .exercise code [contenteditable]{
   min-width: 1rem;
