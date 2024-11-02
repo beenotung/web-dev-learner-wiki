@@ -66,16 +66,211 @@ let style = Style(/* css */ `
 type Exercise = {
   expect_print: string
   code: string
+  message: string
 }
 
 let exercises: Exercise[] = [
   {
     expect_print: '7',
     code: 'console.log(3 + _)',
+    message:
+      'You need to complete the expression by adding a number that results in the expected output.',
   },
   {
-    expect_print: '9',
-    code: 'console.log(5 + _)',
+    expect_print: '3',
+    code: 'console.log(10 - _)',
+    message:
+      'Think about what number you need to subtract from 10 to get the expected result.',
+  },
+  {
+    expect_print: '20',
+    code: 'console.log(4 * _)',
+    message: 'What number should you multiply by 4 to get 20?',
+  },
+  {
+    expect_print: '5',
+    code: 'console.log(25 / _)',
+    message: 'What number should you divide 25 by to get 5?',
+  },
+  {
+    expect_print: 'Hello World',
+    code: 'console.log("Hello" + _)',
+    message: 'You need to concatenate two strings to form "Hello World".',
+  },
+  {
+    expect_print: '6',
+    code: `
+function addTwo(x) {
+  return x + 2;
+}
+console.log(addTwo(_))
+    `,
+    message:
+      'Pass a number to the function so that the result is 6. What should the input be for `x`?',
+  },
+  {
+    expect_print: '12',
+    code: `
+function multiplyByThree(x) {
+  return x * 3;
+}
+let num = 4;
+console.log(multiplyByThree(_))
+    `,
+    message:
+      'Use the existing variable `num` as the argument for the function. Think about how variables are used in functions.',
+  },
+  {
+    expect_print: '0 1 2 3 4',
+    code: `
+for (let i = 0; i < 5; i++) {
+  console.log(_);
+}
+    `,
+    message:
+      'What variable is incrementing in the loop? You need to log the value that changes in each iteration.',
+  },
+  {
+    expect_print: 'Banana',
+    code: `
+let fruits = ['Apple', 'Banana', 'Cherry'];
+console.log(fruits[_]);
+    `,
+    message: 'Arrays are zero-indexed. Which index corresponds to "Banana"?',
+  },
+  {
+    expect_print: '3',
+    code: `
+let numbers = [10, 20, 30];
+console.log(numbers._);
+    `,
+    message:
+      'Use a property of the array to print how many elements are in it.',
+  },
+  {
+    expect_print: '4',
+    code: `
+let arr = [1, 2, 3];
+arr._(4);
+console.log(arr.length);
+    `,
+    message:
+      'There is a method that allows you to add an element to the end of the array. Use it to add 4.',
+  },
+  {
+    expect_print: 'Greater than 10',
+    code: `
+let x = 15;
+if (x > _) {
+  console.log('Greater than 10');
+} else {
+  console.log('Less than or equal to 10');
+}
+    `,
+    message:
+      'You need to compare `x` with a number to check if it is larger than a certain threshold.',
+  },
+  {
+    expect_print: 'True',
+    code: `
+let a = 5;
+let b = 10;
+console.log(a < 10 && _);
+    `,
+    message:
+      'You need to complete the logical expression so that both conditions return true.',
+  },
+  {
+    expect_print: '25',
+    code: `
+function add(x, y) {
+  return x + y;
+}
+console.log(add(_, 15));
+    `,
+    message:
+      'Complete the function call to make the sum of two numbers equal 25.',
+  },
+  {
+    expect_print: '36',
+    code: `
+function square(x) {
+  return x * x;
+}
+function addFive(x) {
+  return x + 5;
+}
+console.log(square(addFive(_)));
+    `,
+    message:
+      'Think about how the two functions work together. The input should be a number that, when passed through both functions, results in 36.',
+  },
+  {
+    expect_print: 'John',
+    code: `
+let person = {
+  name: 'John',
+  age: 30
+};
+console.log(person._);
+    `,
+    message: 'Access the property of the object that stores the person’s name.',
+  },
+  {
+    expect_print: 'Hello, Alice!',
+    code: `
+let greeter = {
+  name: 'Alice',
+  greet() {
+    return 'Hello, ' + this._ + '!';
+  }
+};
+console.log(greeter.greet());
+    `,
+    message:
+      'In an object method, `this` refers to the object itself. Which property does the method need to access?',
+  },
+  {
+    expect_print: '2,4,6',
+    code: `
+let numbers = [1, 2, 3];
+let doubled = numbers.map(function(num) {
+  return _ * 2;
+});
+console.log(doubled.join(','));
+    `,
+    message:
+      'The `map` function applies a transformation to each element in the array. Use the provided argument to create the desired output.',
+  },
+  {
+    expect_print: '20,30',
+    code: `
+let numbers = [10, 20, 30];
+let filtered = numbers.filter(function(num) {
+  return num > _;
+});
+console.log(filtered.join(','));
+    `,
+    message:
+      'The `filter` method returns elements that meet a condition. What number should you use to filter out values greater than 15?',
+  },
+  {
+    expect_print: 'Data received',
+    code: `
+function getData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Data received'), 1000);
+  });
+}
+
+async function fetchData() {
+  let data = await getData();
+  console.log(_);
+}
+fetchData();
+    `,
+    message:
+      'Fill in the blank to log the result of the resolved promise. Remember, `data` holds the value returned by the promise.',
   },
 ]
 
@@ -89,9 +284,12 @@ let page = (
         <code>console.log(1 + 1)</code>
         <div class="exercise-message">print: 2</div>
       </div>
-      {mapArray(exercises, exercise => {
+      {mapArray(exercises, (exercise, i) => {
         return (
           <div className="exercise">
+            <p>
+              {i + 1}. {exercise.message}
+            </p>
             <div class="exercise-message">
               expected to{' '}
               <span class="expected-result">
@@ -100,7 +298,7 @@ let page = (
             </div>
             <code>
               {mapArray(
-                exercise.code.split('_'),
+                exercise.code.trim().split('_'),
                 part => part,
                 <span contenteditable onkeypress="checkInput(event)">
                   0
